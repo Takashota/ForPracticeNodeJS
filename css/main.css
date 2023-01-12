@@ -1,0 +1,12 @@
+body{
+	background-color: black;
+	color:aliceblue;
+}
+
+a{
+	background-color: darkgray;
+}
+
+.HttpRequest{
+	font-size: 50px;
+}
