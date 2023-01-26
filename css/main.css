@@ -10,3 +10,16 @@ a{
 .HttpRequest{
 	font-size: 50px;
 }
+
+.loginForm{
+	background-color: green;
+	margin: 10px, 10px, 10px, 10px;
+	border: 10px, 10px, 10px, 10px;
+	max-height: 3000px;
+	max-width: 3000px;
+	height: auto;
+	width: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
