@@ -9,6 +9,13 @@
 
 	// 1. Require http module.
 	// 2. Create server through the port 8080.
+//	const http = require("http");
+//
+//	http.createServer(function(req,res){
+//		res.writeHead(200, {"Content-Type" : "text/plain"});
+//		res.write("hello");
+//		res.end();
+//	}).listen(8080);
 
 	/* Sample
 	const http = require("http");
@@ -23,6 +30,15 @@
 
 	// 1. Create Server (Delete or Comment out your codes so far.)
 	// 2. Read a function from myDate() from the "myfirstmodule".
+
+//	const http = require("http");
+//	const dt = require("./module/myfirstmodule2");
+//
+//	http.createServer(function(req,res){
+//		res.writeHead(200, {"Content-Type" : "text/plain"});
+//		res.write("It's " + dt.myDate());
+//		res.end();
+//	}).listen(8080);
 
 	/* Sample
 	const http = require("http");
@@ -40,6 +56,14 @@
 	// 1. Create Server (Delete or Comment out your codes so far.)
 	// 2. Display "/summer" by request URL.
 
+//	const http = require("http");
+//
+//	http.createServer(function(req,res){
+//		res.writeHead(200, {"Content-Type" : "text/plain"});
+//		res.write(req.url);
+//		res.end();
+//	}).listen(8080);
+
 	/* Sample
 	const http = require("http");
 
@@ -56,6 +80,21 @@
 	// 2. Get file server
 	// 3. Create a file named "demofile.html" 
 	// 3. Read a file, demofile.html.
+	//const http = require("http");
+	//const fs = require("fs");
+//
+	//http.createServer(function(req,res){
+//
+	//	fs.readFile("./html/demofile.html", function(err, data){
+	//		res.writeHead(200, {"Content-Type" : "text/html"});
+	//		res.write(data);
+	//		res.end();
+	//	});
+	//	//res.writeHead(200, {"Content-Type" : "text/plain"});
+	//	//res.write("hello");
+	//	//res.end();
+	//}).listen(8080);
+	
 
 	/* Sample
 	const http = require("http");
@@ -75,6 +114,50 @@
 	// 1. Get modules http, fs, url, summer.html and winter.html.
 	// 2. Create server.
 	// 3. Create a variable named URLFromClient for inputting url.
+
+	const http = require("http");
+	const url = require("url");
+	const fs = require("fs");
+
+	const Index = fs.readFileSync("./html/index.html", "UTF-8");
+	const Css = fs.readFileSync("./css/main.css", "UTF-8");
+	const PracticeJs = fs.readFileSync("./js/1.practice.js", "UTF-8");
+
+	http.createServer(function(req,res){
+
+		// Route
+		// switch statement
+		var URLFromClient = url.parse(req.url);
+
+		switch(URLFromClient.pathname){
+			case "/":
+				break;
+			case "/html/index.html":
+				res.writeHead(200, {"Content-Type" : "text/html"});
+				res.write(Index);
+				res.end();
+				break;
+			case "/css/main.css": 
+				res.writeHead(200, {"Content-Type" : "text/css"});
+				res.write(Css);
+				res.end();
+				break;
+			case "/js/1.practice.js":
+				res.writeHead(200, {"Content-Type" : "text/plain"});
+				res.write(PracticeJs);
+				res.end();
+				break;
+			default:
+				res.writeHead(404, {"Content-Type" : "text/plain"});
+				res.write("404: Not found.");
+				res.end();
+				break;
+		}
+
+		//res.writeHead(200, {"Content-Type" : "text/plain"});
+		//res.write("hi");
+		//res.end();
+	}).listen(8080);
 
 	/* Sample 
 	const http = require("http");
