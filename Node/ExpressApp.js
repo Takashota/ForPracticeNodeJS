@@ -1,10 +1,10 @@
 // http://localhost:3000/
 
 // 01. Import Express ~ Display hello.ejs
-	
 	// 1. Import Express 
 	// 2. Initialize Express
-	// 3. Routing "/".
+	// 3. Routing "/" for displaying "hello.ejs".
+	// 4. Create server with using "app.listen(3000);".
 
 	/* Sample
 
@@ -12,6 +12,7 @@
 	const app = express();
 
 	// Routing
+	// root URL
 	app.get("/", (req,res) => {
 		// 表示したいejsファイルを指定する
 		res.render("hello.ejs");
@@ -31,7 +32,9 @@
 
 	// 1. Import Express 
 	// 2. Initialize Express
-	// 3. NEW: Routing "/" and "/top".
+	// 3. Routing "/" for displaying "hello.ejs".
+	// 4. Create server with using "app.listen(3000);".
+	// 3. [New] : Routing "/top" for displaying "top.ejs".
 
 	/* Sample
 
@@ -59,12 +62,12 @@
 
 
 
-// 2. Import a specified folder & applying css.
+// 02. Import a specified folder & applying css.
 
 	// 1. Import Express 
 	// 2. Initialize Express
 	// 3. Routing "/" and "/top".
-	// NEW: 4. Routing "public" directory.
+	// [New] : 4. Routing "public" directory.
 	// You can use "style.css" by reading public folder.
 
 	/* Sample 
@@ -90,14 +93,14 @@
 
 
 
-// 3. Add the index.ejs
+// 03. Add the index.ejs
 
 	// 1. Import Express 
 	// 2. Initialize Express
 	// 3. Routing "/" and "/top".
 	// 4. Routing "public" directory.
 	// You can use "style.css" by reading public folder.
-	// NEW: 5. Add the index.ejs.
+	// [New] : 5. Add the index.ejs.
 
 	/* Sample
 
@@ -124,33 +127,39 @@
 
 
 
-
-
-// 04. Add the row of the list that has ID: 4 and name: tomato.
-
-	// EJS : 
-		// index.ejs
-		/*
-
-		1.
-		<!-- Use EJS to define the item constant -->
-		<% const item = {id: 4, name: 'tomatoes'}; %>
-
-		2.
-		<!-- Display the id property of item -->
-		<%= item.id %>
-
-		3.
-		<!-- Display the name property of item -->
-		<%= item.name %>
-
-		*/
-
-// 05. 
+// 04. EJS : Add the 2 codes bellow on the "hello.ejs" with using EJS.
+	
+	//Code 1: const greeting = hello;
+	//Code 2: console.log(greeting);
 
 	// 1. Import Express 
 	// 2. Initialize Express
 	// 3. Routing "/" and "/top".
+	// 4. Routing "public" directory.
+	// You can use "style.css" by reading public folder.
+	// 5. Add the index.ejs.
+	// 6. [New] : Display "hello" on your console.
+
+	/* Sample "hello.ejs"
+		<% const greeting = "hello"; %>
+		<% console.log(greeting); %>
+	*/
+
+// 05. Create elements of list with using forEach().
+	// 1. Import Express 
+	// 2. Initialize Express
+	// 3. Routing "/" and "/top".
+	// 4. Routing "public" directory.
+	// You can use "style.css" by reading public folder.
+	// 5. Add the index.ejs.
+	// 6. Display "hello" on your console.
+	// 7. [New] : At the "index.ejs", add the code for displaying element of list.
+
+// 06.  
+
+	// 1. Import Express 
+	// 2. Initialize Express
+	// 3. [New] : Routing "/" for "top.ejs".
 	// 4. Routing "public" directory.
 	// 5. Add the index.ejs.
 
