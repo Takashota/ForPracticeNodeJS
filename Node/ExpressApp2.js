@@ -210,6 +210,9 @@
 	// 7. [New] : At the "index.ejs", add the code for displaying element of list.
 	const express = require("express");
 	const app = express();
+	const axios = require("axios");
+
+	const url = "https://jsonplaceholder.typicode.com/users";
 
 	app.get("/", (req,res) => {
 		res.render("hello.ejs");

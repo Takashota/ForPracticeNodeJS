@@ -9,13 +9,13 @@
 
 	// 1. Require http module.
 	// 2. Create server through the port 8080.
-	const http = require("http");
-	http.createServer(function(req,res){
-		res.writeHead(200, {"Content-Type" : "text/plain"});
-		res.write("Hello");
-		res.end();
-	}).listen(8080);
-
+//	const http = require("http");
+//
+//	http.createServer(function(rea,res){
+//		res.writeHead(200, {"Content-Type" : "text/plain"});
+//		res.write("hello");
+//		res.end();
+//	}).listen(8080);
 	/* Sample
 	const http = require("http");
 	http.createServer(function(req,res){
@@ -29,6 +29,14 @@
 
 	// 1. Create Server (Delete or Comment out your codes so far.)
 	// 2. Read a function from myDate() from the "myfirstmodule".
+	//const { resolveSoa } = require("dns/promises");
+	//const http = require("http");
+	//const dt = require("./module/myfirstmodule3")
+	//http.createServer(function(req,res){
+	//	res.writeHead(200, {"Content-Type" : "text/plain"});
+	//	res.write("It's " + dt.myDate());
+	//	res.end();
+	//}).listen(8080);
 
 	/* Sample
 	const http = require("http");
@@ -45,7 +53,13 @@
 
 	// 1. Create Server (Delete or Comment out your codes so far.)
 	// 2. Display "/summer" by request URL.
-
+//	const http = require("http");
+//
+//	http.createServer(function(req,res){
+//		res.writeHead(200, {"Content-Type" : "text/plain"});
+//		res.write(req.url);
+//		res.end();
+//	}).listen(8080);
 	/* Sample
 	const http = require("http");
 
@@ -62,6 +76,22 @@
 	// 2. Get file server
 	// 3. Create a file named "demofile.html" 
 	// 3. Read a file, demofile.html.
+
+//	const http = require("http");
+//	const fs = require("fs");
+//
+//	http.createServer(function(req,res){
+//
+//		fs.readFile("./html/demofile.html", function(err,data){
+//			res.writeHead(200, {"Content-Type" : "text/html"});
+//			res.write(data);
+//			res.end();
+//		});
+//
+//		//res.writeHead(200, {"Content-Type" : "text/plain"});
+//		//res.write("hello ");
+//		//res.end();
+//	}).listen(8080);
 
 	/* Sample
 	const http = require("http");
@@ -81,7 +111,77 @@
 	// 1. Get modules http, fs, url, summer.html and winter.html.
 	// 2. Create server.
 	// 3. Create a variable named URLFromClient for inputting url.
+	// 4. New: event
+	const http = require("http");
+	const url = require("url");
+	const fs = require("fs");
+	// Import "events"
+	const events = require("events");
+	// Initialize 
+	const eventEmitter = new events.EventEmitter();
 
+	console.log("I hear a scream. (Console)")
+
+	// Create event handler
+	const myEventHandler = function(){
+		console.log(" I hear a scream!");
+	}
+
+	eventEmitter.on("scream", myEventHandler);
+	eventEmitter.emit("scream");
+
+	const IndexHtml = fs.readFileSync("./index.html", "UTF-8");
+	const LoginHtml = fs.readFileSync("./html/login.html", "UTF-8");
+	const summer = fs.readFileSync("./html/summer.html", "UTF-8");
+	const winter = fs.readFileSync("./html/winter.html", "UTF-8");
+	const MainCss = fs.readFileSync("./css/main.css", "UTF-8");
+	const MainJs = fs.readFileSync("./js/1.practice.js", "UTF-8");
+
+	http.createServer(function(req,res){
+		const URLFromClient = url.parse(req.url);
+
+		switch(URLFromClient.pathname){
+			// root directory
+			case "/" : 
+				break;
+			case "/index.html" : 
+				res.writeHead(200, {"Content-Type" : "text/html"});
+				res.write(IndexHtml);
+				res.end();
+				break;
+			case "/html/login.html":
+				res.writeHead(200, {"Content-Type" : "text/html"});
+				res.write(LoginHtml);
+				res.end();
+				break;
+			case "/html/summer.html":
+				res.writeHead(200, {"Content-Type" : "text/html"});
+				res.write(summer);
+				res.end();
+				break;
+			case "/html/winter.html":
+				res.writeHead(200, {"Content-Type" : "text/html"});
+				res.write(winter);
+				res.end();
+				break;
+			case "/css/main.css":
+				res.writeHead(200, {"Content-Type" : "text/css"});
+				res.write(MainCss);
+				res.end();
+				break;
+			case "/js/1.practice.js":
+				res.writeHead(200, {"Content-Type" : "text/plain"});
+				res.write(MainJs);
+				res.end();
+				break;
+			default:
+				res.writeHead(404, {"Content-Type" : "text/plain"});
+				res.write("404: Not found.");
+				res.end();
+				break;
+		}
+
+	}).listen(8080);
 	/* Sample 
 	const http = require("http");
 	const url = require("url");
