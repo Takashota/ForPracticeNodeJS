@@ -163,5 +163,80 @@
 	// 4. Routing "public" directory.
 	// 5. Add the index.ejs.
 
+// 07.
+
+	// 1. Import modules
+		// express
+		// mysql
+	// 2. Create rooting with express.
+	// 3. Read CSS files with use method.
+	// 4. Create a server.
+	// 5. Connect to Database.
+	const express = require("express");
+	const app = express();
+	const mysql = require("mysql");
+	const bodyParser = require("body-parser");
+
+	app.get("/", (req,res) => {
+		res.render("index.ejs");
+	});
+
+	app.get("/top", (req,res) => {
+		res.render("top.ejs");
+	});
+
+	app.get("/index", (req,res) => {
+		res.render("index.ejs");
+	});
+
+	app.use(express.static("public"));
+
+	app.use(bodyParser.urlencoded({ extended : true}));
+	// req.body オブジェクトをjsonに変換
+	app.use(bodyParser.json());
+
+	// DB	
+	const con = mysql.createConnection({
+		//host
+		host : "localhost",
+		//user
+		user : "root",
+		//password
+		password : "root",
+		database : "express_db"
+	});
+
+	con.connect(function(err) {
+		if (err) throw err;
+		console.log('Connected');
+
+		//const sql = 'ALTER TABLE users ADD test VARCHAR(20) NULL';
+		//con.query(sql, function (err, result) {  
+		//if (err) throw err;  
+		//console.log('Inserted a new column.');  
+		//});
+	});	
 
 
+	app.post("/display", (req,res) => {
+		console.log("Hi client.");
+
+		const sql = 'ALTER TABLE users ADD test2 VARCHAR(20) NULL';
+		con.query(sql, function (err, result) {  
+			if (err) throw err;  
+			console.log('Inserted a new column.');  
+		});
+	});
+
+	app.post("/delete", (req,res) => {
+		console.log("I'll delete a column.");
+		console.log(req.method, req.url, req.ip);
+		//const sql_deleteColumn = "ALTER TABLE users DROP COLUMN test2;";
+		//con.query(sql_deleteColumn, (err,result) => {
+		//	if(err) throw err;
+		//	console.log("Deleted a test2 column.");
+		//});
+
+	});
+
+	app.listen(3000);
