@@ -189,6 +189,10 @@
 		res.render("index.ejs");
 	});
 
+	app.get("/display", (req,res) => {
+		res.render("success.ejs");
+	});
+
 	app.use(express.static("public"));
 
 	app.use(bodyParser.urlencoded({ extended : true}));
@@ -221,10 +225,11 @@
 	app.post("/display", (req,res) => {
 		console.log("Hi client.");
 
-		const sql = 'ALTER TABLE users ADD test2 VARCHAR(20) NULL';
+		const sql = 'ALTER TABLE users ADD test4 VARCHAR(20) NULL';
 		con.query(sql, function (err, result) {  
 			if (err) throw err;  
 			console.log('Inserted a new column.');  
+			res.render("success.ejs");
 		});
 	});
 
